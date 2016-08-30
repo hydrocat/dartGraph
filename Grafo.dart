@@ -20,13 +20,13 @@ class Grafo {
   }
 
   matrizIncidencia() {
-    Map<Vertice, Map<Vertice, num>> mapa =
-        new Map<Vertice, Map<Vertice, num>>();
+    var mapa = new Map<Vertice, Map<Vertice, num>>();
     this.E.forEach((e) {
-	   mapa[e.de] = new Map<Vertice,num>();
-	   mapa[e.de][e.para] = 1;
+      mapa[e.de] = new Map<Vertice, num>();
+      mapa[e.de][e.para] = 1;
     });
     print(mapa);
+	return mapa;
   }
 
   inserirArestaBidimensional(Vertice v1, Vertice v2) {
@@ -65,7 +65,7 @@ class Grafo {
   //Remove arestas do grafo
   removerAresta(Aresta aresta) {
     this.lista[aresta.de.label].removeWhere((e) => e == aresta);
-    return this.E.removeWhere((e) => e == aresta);
+    this.E.removeWhere((e) => e == aresta);
   }
 
   Aresta buscarAresta(Vertice v1, Verice v2) {
