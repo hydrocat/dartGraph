@@ -70,19 +70,28 @@ main()
 	print("buscar Vertice");
 	grafo.inserirAresta(a);
 	print(grafo.buscarVertice('2'));
-	print(grafo);
 
-	print("buscar Aresta");
-	var aas = new Aresta( new Vertice('3'), new Vertice('2') );
-	var aad = new Aresta( new Vertice('3'), new Vertice('2') );
-	grafo.inserirAresta(aas);
-	grafo.inserirAresta(aad);
+	print("buscar Aresta bidimensinal");
+	var v1 = new Vertice('3');
+	var v2 = new Vertice('2');
+	var a1 = new Aresta(v1,v2);
+	var a2 = new Aresta(v2,v1);
+	grafo.inserirAresta(a2);
+	grafo.inserirAresta(a1);
+	grafo.removerVertice('2');
+	a = new Vertice("a");
+	b = new Vertice("b");
+	c = new Vertice("c");
 
+	aa = new Aresta(a,a);
+	ab = new Aresta(a,b);
+	ba = new Aresta(b,a);
+	ac = new Aresta(a,c);
+	cb = new Aresta(c,b);
+	grafo = new Grafo(vertices:[a,b,c], arestas:[aa,ab,ba,ac,cb,ca]);
 	print(grafo);
-	print(grafo.V.first);
-	print(grafo.V.first == new Vertice('2') );
-	var lks = new Vertice('8');
-	print( grafo.V.any((e)=>e==lks) == null );
-	//expect(l.first,equals(vertice));
+	//grafo.removerVertice('a');
+	print(grafo);
+	print(grafo.matrizIncidencia());
 
 }
