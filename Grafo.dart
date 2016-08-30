@@ -19,14 +19,13 @@ class Grafo {
     }
   }
 
-  matrizIncidencia() {
+  matrizAdjacencia() {
     var mapa = new Map<Vertice, Map<Vertice, num>>();
     this.E.forEach((e) {
       mapa[e.de] = new Map<Vertice, num>();
       mapa[e.de][e.para] = 1;
     });
-    print(mapa);
-	return mapa;
+    return mapa;
   }
 
   inserirArestaBidimensional(Vertice v1, Vertice v2) {
@@ -50,16 +49,12 @@ class Grafo {
   }
 
   inserirAresta(Aresta a) {
-    var label = a.de.label;
-    if (this.lista[label] == null) {
-      this.lista[label] = new List<Aresta>();
-    }
-    this.lista[label].add(a);
+	  inserirVertice(a.de);
+	  inserirVertice(a.para);
+		a.para.vizinhos.add(a.de);
+    this.lista[a.de.label].add(a);
     this.E.add(a);
 
-    if (!this.V.any((e) => e == a.para)) {
-      inserirVertice(a.para);
-    }
   }
 
   //Remove arestas do grafo
@@ -82,22 +77,22 @@ class Grafo {
   }
 
   removerVertice(String a) {
-    List aRemover = new List<Aresta>();
-    this.lista.remove(a);
-    this.lista.forEach((k, v) {
-      v.any((e) {
-        if (e.para.label == a) {
-          aRemover.add(e);
-        }
-      });
-    });
-    aRemover.forEach((e) => removerAresta(e));
+		Vertice vertice = buscarVertice(a);
+		if( vertice == null ){ return; }
+		vertice.vizinhos.forEach((e){
+			removerAresta( new Aresta(e, new Vertice(a)) );	
+		});
+		this.lista.remove(a);
     this.V.removeWhere((e) => e.label == a);
     this.E.removeWhere((e) => (e.de.label == a) || (e.para.label == a));
   }
 
   Vertice buscarVertice(String label) {
-    return this.V.firstWhere((e) => e.label == label);
+    try{
+			return this.V.firstWhere((e) => e.label == label);
+		}catch(e) {
+			return null;
+		}
   }
 
   toString() {

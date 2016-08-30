@@ -2,6 +2,7 @@ library Vertice;
 
 class Vertice {
 	var label;
+	List<Vertice> vizinhos = new List();
 	Vertice(this.label);
 	toString() => "(${label})";
 
