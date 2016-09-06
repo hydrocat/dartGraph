@@ -91,6 +91,7 @@ class Grafo {
     try{
 			return this.V.firstWhere((e) => e.label == label);
 		}catch(e) {
+			print(e);
 			return null;
 		}
   }
