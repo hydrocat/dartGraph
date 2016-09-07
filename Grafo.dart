@@ -49,11 +49,11 @@ class Grafo {
   }
 
   inserirAresta(Aresta a) {
-	  inserirVertice(a.de);
-	  inserirVertice(a.para);
-		a.para.vizinhos.add(a.de);
-    this.lista[a.de.label].add(a);
-    this.E.add(a);
+	inserirVertice(a.de);
+	inserirVertice(a.para);
+	a.para.vizinhos.add(a.de);
+	this.lista[a.de.label].add(a);
+	this.E.add(a);
 
   }
 

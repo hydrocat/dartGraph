@@ -5,6 +5,7 @@ import "Aresta.dart";
 import "dart:collection";
 
 List<VerticeBL> Q = new Queue<VerticeBL>();
+num tempo;
 
 void BFS_Init( Grafo g, VerticeBL inicio ) {
 		if ( g.V.first is! VerticeBL ) {
@@ -27,6 +28,7 @@ void BFS_Init( Grafo g, VerticeBL inicio ) {
 	inicio.pi = null;
 	Q.addFirst(inicio);
 }
+
 void BFS( Grafo g ) {
 	while ( Q.length != 0 )
 	{
@@ -42,4 +44,42 @@ void BFS( Grafo g ) {
 		});
 		u.cor = "preto";
 	}
+}
+
+void DFS_Init( Grafo g ) {
+	if ( g.V.first is! VerticeBP ) {
+		print(	"""
+				Vertices precisam ser do tipo VerticeBP.
+				Nada foi feito.
+				"""
+			 );
+	}
+
+	g.V.forEach((u) {
+		u.cor = "branco";
+		u.pi = null;	
+	});
+	tempo = 0;
+	g.V.forEach((u) {
+		if ( u.cor == "branco" ) {
+			DFS_Visit( g, u );
+		}
+	});
+}
+
+void DFS_Visit( Grafo g, VerticeBP u ) {
+	tempo ++;
+	u.d = tempo;
+	u.cor = "cinza";
+	g.lista[u.label].forEach((v){
+		v = v.para;
+		if ( v.cor == "branco" ) {
+			v.pi = u;
+			DFS_Visit(g, v);
+		}
+	});
+
+	u.cor = "preto";
+	tempo++;
+	u.f = tempo;
 }

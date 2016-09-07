@@ -16,7 +16,7 @@ class VerticeColorido extends Vertice {
 
 class VerticeBL extends VerticeColorido {
 	VerticeBL pi;
-	var d;
+	num d;
 	VerticeBL( var label,[var cor, this.pi, this.d] ) : super(label, cor);
 
 	toString() {
@@ -26,4 +26,22 @@ class VerticeBL extends VerticeColorido {
 		if ( d != null ){ ret += "\`${d}"; }
 		return ret += ")";
 	}
+}
+
+class VerticeBP extends VerticeColorido {
+	num f;
+	num d;
+	VerticeBP pi;
+
+	VerticeBP( var label,[var cor, this.pi, this.d, this.f] ) : super(label, cor);
+
+	toString() {
+		String ret = "($label";
+		if ( pi != null  ){ ret += "\'${pi.label}";	}
+		if ( cor != null ){ ret += "\^${cor}"; }
+		if ( d != null ){ ret += "\`${d}"; }
+		if ( f != null ){ ret += "\"${f}"; }
+		return ret += ")";
+	}
+
 }
